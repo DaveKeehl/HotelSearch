@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>HotelSearchEngine</title>
+		<link href="src/styles/layout.css" rel="stylesheet" type="text/css">
+		<link href="src/styles/style.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		
+		<div class="resultsPage">
+			<div class="search">
+				<a href="index.html" class="logo">HotelSearch.</a>
+				<div class="form">
+					<input id="query" type="text" name="query" placeholder="Enter a query"/>
+				</div>
+				<a href="https://www.github.com/DaveKeehl/ir-project" target="_blank" rel="noopener noreferrer">
+					<img src="src/images/github.svg" alt="Github logo"></img>
+				</a>
+			</div>
+			<div class="results">
+				<div class="resultsList">
+					<h1>Results.</h1>
+					<div class="resultsHeader">
+						<p id="numberOfResults">0 results.</p>
+						<img src="src/images/map.svg" class="grayscale">
+					</div>
+					<div class="mapContainer">
+						<div id="map"></div>
+					</div>
+					<div id="results">
+						<div id="nothing-to-show">
+							<h1>Something - went - wrong.</h1>
+							<img src="src/images/robot.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKTI49TddPF3OIPviF62uOEUPOFRiOOdE&callback=initMap"
+    async defer></script>
+	<script src="js/fetch-data.js"></script>
+	<script src="js/geographical-results.js"></script>
+
+	<script>
+	
+
+
+	</script>
+
+</html>
