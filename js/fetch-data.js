@@ -169,6 +169,11 @@ function composeRequest() {
 			</div>
 		`;
 		document.getElementById("results").innerHTML = output;
+		mapToggle.classList.remove("colorful");
+		mapToggle.classList.add("grayscale");
+		mapContainer.classList.remove("map-open");
+		mapContainer.classList.add("map-closed");
+		mapState = false;
 		console.log("Please enter a query");
 	}
 }

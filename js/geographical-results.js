@@ -19,7 +19,6 @@ function initMap() {
 };
 
 function codeAddress(hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken) {
-	// var address = document.getElementById('address').value;
 	geocoder.geocode({ 'address': address}, function(results, status){
 		if (status == 'OK') {
 			let coordinates = results[0].geometry.location;
