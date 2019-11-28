@@ -30,6 +30,12 @@ function composeRequest() {
 							<img src="src/images/robot.png">
 						</div>
 					`;
+					document.getElementById("results").innerHTML = output;
+					mapToggle.classList.remove("colorful");
+					mapToggle.classList.add("grayscale");
+					mapContainer.classList.remove("map-open");
+					mapContainer.classList.add("map-closed");
+					mapState = false;
 					console.log("no results");
 				} else {
 					data.response.docs.forEach(function(doc) {
@@ -132,7 +138,12 @@ function composeRequest() {
 							if (wordsInTitle[0] === "THE" && wordsInTitle[1] === "10" && wordsInTitle[2] === "BEST") {
 								console.log("found a TOP 10 list... skipping");
 							} else {
-								codeAddress(hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
+								// console.log(hotel);
+								// console.log(url);
+								// console.log(address);
+								// console.log(phoneNumber);
+								// console.log(hotelDescription);
+								codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
 							}
 						}
 						if (typeof hotelDescription === 'undefined') {

@@ -18,7 +18,8 @@ function initMap() {
 
 };
 
-function codeAddress(hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken) {
+function codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken) {
+	console.log("entered");
 	geocoder.geocode({ 'address': address}, function(results, status){
 		if (status == 'OK') {
 			let coordinates = results[0].geometry.location;
@@ -98,7 +99,7 @@ function codeAddress(hotel, url, address, phoneNumber, hotelDescription, score, 
 				infowindow.open(map, marker);
 			});
 		} else {
-			console.log('Geocode was not successful for the following reason: ' + status);
+			console.log(i + ") " + hotel + '--> Geocode for was not successful for the following reason: ' + status);
 		}
 	});
 }

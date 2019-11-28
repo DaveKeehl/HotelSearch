@@ -4,7 +4,7 @@
 
 html {
 	overflow-x: hidden;
-	overflow-y: auto;
+	/* overflow-y: auto; */
 }
 
 .search {
@@ -209,6 +209,7 @@ html {
 	align-items: center;
 	text-align: center;
 	margin-top: 100px;
+	margin-bottom: 100px;
 }
 
 #nothing-to-show h1 {
