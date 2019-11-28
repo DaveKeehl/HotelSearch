@@ -19,7 +19,6 @@ function composeRequest() {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
-				// console.log(data);
 				let output = '';
 				let loadingTime = data.responseHeader.QTime + "ms.";
 				let i = 0;
@@ -36,7 +35,7 @@ function composeRequest() {
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
 						let splitContent = content.split("\n");
-						console.log(splitContent);
+						// console.log(splitContent);
 						let nextIsAddress = 0;
 						let nextIsPhoneNumber = 0;
 						let nextIsPropertyAmenities = 0;
@@ -122,10 +121,10 @@ function composeRequest() {
 								nextIsLanguageSpoken = 1;
 							}
 						}
-						console.log(propertyAmenities);
-						console.log(roomFeatures);
-						console.log(roomTypes);
-						console.log(languageSpoken);
+						// console.log(propertyAmenities);
+						// console.log(roomFeatures);
+						// console.log(roomTypes);
+						// console.log(languageSpoken);
 						hotelDescription = descriptions[0];
 						if (i < 20) {
 							// ADD MARKER WITH POSITION

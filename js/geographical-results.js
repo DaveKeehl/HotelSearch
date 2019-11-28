@@ -24,7 +24,6 @@ function codeAddress(hotel, url, address, phoneNumber, hotelDescription, score, 
 		if (status == 'OK') {
 			let coordinates = results[0].geometry.location;
 			map.setCenter(coordinates);
-			// propertyAmenities.replace(",", ", ");
 			let processedPropertyAmenities = [];
 			let processedRoomFeatures = [];
 			let processedRoomTypes = [];
