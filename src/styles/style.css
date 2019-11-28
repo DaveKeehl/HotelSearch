@@ -4,6 +4,7 @@
 
 html {
 	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .search {
@@ -300,8 +301,16 @@ html {
 /* MEDIAQUERIES */
 
 @media screen and (max-width: 768px) {
-	.search form {
+	.search {
+		flex-direction: column;
+		padding: 40px 20px;
+	}
+	.search a.logo {
+		font-size: 40px;
+	}
+	.search .form {
 		width: 80%;
+		margin: 20px 0;
 	}
 }
 
@@ -312,7 +321,7 @@ html {
 	.search h1 {
 		font-size: 40px;
 	}
-	.search form {
+	.search .form {
 		width: 100%;
 	}
 	.results {

@@ -138,6 +138,6 @@ mapToggle.addEventListener("click", event => {
 			mapState = false;
 		}
 	} else {
-		alert("Please make a query");
+		alert("Please enter a query.");
 	}
 });
