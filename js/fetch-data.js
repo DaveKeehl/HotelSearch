@@ -10,9 +10,9 @@ searchField.addEventListener("keydown", (event) => {
 
 function composeRequest() {
 	console.clear();
-	var solrRequest = "http://localhost:8983/solr/nutch/select?q=title%3A";
+	var solrRequest = "http://localhost:8983/solr/nutch/select?q=title%3A(";
 	let processedQuery = searchField.value.replace(/ /g, " AND ");
-	let rows = "&rows=100";
+	let rows = ")&rows=100";
 	let requestFormat = "&wt=json";
 	var finalRequest = solrRequest + processedQuery + rows + requestFormat;
 	console.log(finalRequest);
