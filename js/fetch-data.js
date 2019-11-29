@@ -4,6 +4,7 @@ searchField.addEventListener("keydown", (event) => {
 		setMapOnAll(null);
 		composeRequest();
 		document.activeElement.blur();
+		window.scrollTo(0, 0);
 	}
 });
 
