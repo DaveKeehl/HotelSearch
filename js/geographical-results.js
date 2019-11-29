@@ -106,7 +106,9 @@ function codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, scor
 
 function setMapOnAll(map) {
 	for (var i = 0; i < markers.length; i++) {
-		markers[i].setMap(map);
+		setTimeout(function(){
+			markers[i].setMap(map);
+		},3000);
 	}
 }
 
