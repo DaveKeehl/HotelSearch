@@ -23,7 +23,9 @@ function composeRequest() {
 				let output = '';
 				let loadingTime = data.responseHeader.QTime + "ms.";
 				let i = 0;
-				if (data.response.numFound <= 0) {
+				if (data.response.numFound === 0) {
+					solrRequest = "http://localhost:8983/solr/nutch/select?q=url%3A(";
+					console.log(finalRequest);
 					setMapOnAll(null);
 					output = `
 						<div id="nothing-to-show">
