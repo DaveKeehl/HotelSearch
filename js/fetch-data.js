@@ -25,6 +25,7 @@ function composeRequest() {
 				let i = 0;
 				if (data.response.numFound === 0) {
 					solrRequest = "http://localhost:8983/solr/nutch/select?q=title%3A(";
+					var finalRequest = solrRequest + processedQuery + rows + requestFormat;
 					console.log(finalRequest);
 					setMapOnAll(null);
 					output = `
