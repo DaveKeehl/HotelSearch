@@ -9,10 +9,10 @@ searchField.addEventListener("keydown", (event) => {
 
 function composeRequest() {
 	console.clear();
-	var solrRequest = 'http://localhost:8983/solr/nutch/select?q=title%3A';
-	let processedQuery = searchField.value.replace(/\s+/g, '\%26');
-	let rows = '&rows=100';
-	let requestFormat = '&wt=json';
+	var solrRequest = "http://localhost:8983/solr/nutch/select?q=title%3A";
+	let processedQuery = searchField.value.replace(/ /g, "\%26");
+	let rows = "&rows=100";
+	let requestFormat = "&wt=json";
 	var finalRequest = solrRequest + processedQuery + rows + requestFormat;
 	console.log(finalRequest);
 	if (searchField.value !== '') {
