@@ -20,6 +20,7 @@ function composeRequest() {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
+				console.log(data);
 				let output = '';
 				if (data.response.numFound === 0) {
 					setMapOnAll(null);
@@ -41,7 +42,7 @@ function composeRequest() {
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
 						let splitContent = content.split("\n");
-						console.log(splitContent);
+						// console.log(splitContent);
 						let nextIsAddress = 0;
 						let nextIsPhoneNumber = 0;
 						let nextIsPropertyAmenities = 0;
