@@ -16,17 +16,13 @@ function composeRequest() {
 	let requestFormat = "&wt=json";
 	var finalRequest = solrRequest + processedQuery + rows + requestFormat;
 	console.log(finalRequest);
-	if (searchField.value !== '') {
+	if (searchField.value !== "") {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
+				processSolrResponse(data);
 				let output = '';
-				let loadingTime = data.responseHeader.QTime + "ms.";
-				let i = 0;
 				if (data.response.numFound === 0) {
-					solrRequest = "http://localhost:8983/solr/nutch/select?q=title%3A(";
-					var finalRequest = solrRequest + processedQuery + rows + requestFormat;
-					console.log(finalRequest);
 					setMapOnAll(null);
 					output = `
 						<div id="nothing-to-show">
@@ -42,10 +38,11 @@ function composeRequest() {
 					mapState = false;
 					console.log("no results");
 				} else {
+					let i = 0;
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
 						let splitContent = content.split("\n");
-						console.log(splitContent);
+						// console.log(splitContent);
 						let nextIsAddress = 0;
 						let nextIsPhoneNumber = 0;
 						let nextIsPropertyAmenities = 0;
@@ -137,16 +134,15 @@ function composeRequest() {
 						// console.log(languageSpoken);
 						hotelDescription = descriptions[0];
 						if (i < 20) {
-							// ADD MARKER WITH POSITION
-							console.log("result number: " + i);
+							// console.log("result number: " + i);
 							if (wordsInTitle[0] === "THE" && wordsInTitle[1] === "10" && wordsInTitle[2] === "BEST") {
 								console.log("found a TOP 10 list... skipping");
 							} else {
-								// console.log(hotel);
-								// console.log(url);
-								// console.log(address);
-								// console.log(phoneNumber);
-								// console.log(hotelDescription);
+									// console.log(hotel);
+									// console.log(url);
+									// console.log(address);
+									// console.log(phoneNumber);
+									// console.log(hotelDescription);
 								codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
 							}
 						}
@@ -171,7 +167,7 @@ function composeRequest() {
 						i = i + 1;
 					});
 				}
-				// console.log(output);
+				let loadingTime = data.responseHeader.QTime + "ms.";
 				document.getElementById("numberOfResults").innerHTML = `${data.response.numFound}` + " results in " + loadingTime;
 				document.getElementById("results").innerHTML = output;
 			})
@@ -191,4 +187,8 @@ function composeRequest() {
 		mapState = false;
 		console.log("Please enter a query");
 	}
+}
+
+function processSolrResponse() {
+
 }
