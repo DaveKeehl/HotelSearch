@@ -41,6 +41,9 @@ function composeRequest() {
 					let i = 0;
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
+						if (typeof content === 'undefined') {
+							continue;
+						}
 						let splitContent = content.split("\n");
 						// console.log(splitContent);
 						let nextIsAddress = 0;
