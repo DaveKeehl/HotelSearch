@@ -8,7 +8,7 @@
 		<link href="src/styles/layout.css" rel="stylesheet" type="text/css">
 		<link href="src/styles/style.css" rel="stylesheet" type="text/css"/>
 	</head>
-	<body>
+	<body onload="console.log('reloaded')">
 		
 		<div class="resultsPage">
 
@@ -45,9 +45,9 @@
 		
 	</body>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8cZ8ahuuHN4iJ1KEkcawP8w3c487H9J8&callback=initMap"
-    async defer></script>
 	<script src="js/fetch-data.js"></script>
 	<script src="js/geographical-results.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8cZ8ahuuHN4iJ1KEkcawP8w3c487H9J8&callback=initMap"
+    async defer></script>
 
 </html>
