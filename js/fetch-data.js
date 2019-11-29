@@ -41,9 +41,6 @@ function composeRequest() {
 					let i = 0;
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
-						if (typeof content === 'undefined') {
-							continue;
-						}
 						let splitContent = content.split("\n");
 						// console.log(splitContent);
 						let nextIsAddress = 0;
@@ -149,12 +146,15 @@ function composeRequest() {
 								codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
 							}
 						}
-						if (typeof hotelDescription === 'undefined') {
+						if (typeof title === 'undefined') {
+							output += ``;
+						}
+						else if (typeof hotelDescription === 'undefined') {
 							output += `
 								<div class="result">
 									<a href=${url} target="_blank" rel="noopener noreferrer">${title}</a>
 									<p>${url}</p>
-									<p>${doc.content}</p>
+									<p>${content}</p>
 								</div>
 							`;
 						} else {
