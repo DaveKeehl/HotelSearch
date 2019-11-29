@@ -41,9 +41,9 @@ function composeRequest() {
 					let i = 0;
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
-						console.log(content);
+						// console.log(content);
 						let splitContent = content.split("\n");
-						// console.log(splitContent);
+						console.log(splitContent);
 						let nextIsAddress = 0;
 						let nextIsPhoneNumber = 0;
 						let nextIsPropertyAmenities = 0;
@@ -57,6 +57,7 @@ function composeRequest() {
 						let address;
 						let phoneNumber;
 						let hotelDescription;
+						let hasNoDescription = 0;
 						let score;
 						let vote;
 						let descriptions = [];
@@ -97,6 +98,14 @@ function composeRequest() {
 									languageSpoken.push(splitContent[i]);
 								}
 							}
+							if (splitContent[i] === "Location" &&
+								splitContent[i+1] === "Cleanliness" && 
+								splitContent[i+2] === "Service" && 
+								splitContent[i+3] === "Value" && 
+								(splitContent[i+4] === "Location" || splitContent[i+4] === "Good to know" || splitContent[i+4] === "Property amenities")) {
+								console.log("this hotel has NO description!!!");
+								hasNoDescription = 1;
+							}
 	
 							if (splitContent[i] === "Share" && splitContent[i-1] === "Save") {
 								nextIsAddress = 1;
@@ -109,7 +118,7 @@ function composeRequest() {
 									phoneNumber = splitContent[i+1];
 								}
 							}
-							else if (splitContent[i] === "Read more") {
+							else if (splitContent[i] === "Read more" && hasNoDescription === 0) {
 								descriptions.push(splitContent[i-1]);
 							}
 							else if (splitContent[i] === "About") {
@@ -134,6 +143,7 @@ function composeRequest() {
 						// console.log(roomTypes);
 						// console.log(languageSpoken);
 						hotelDescription = descriptions[0];
+						console.log("hasNoDescription = " + hasNoDescription);
 						if (i < 20) {
 							// console.log("result number: " + i);
 							if (wordsInTitle[0] === "THE" && wordsInTitle[1] === "10" && wordsInTitle[2] === "BEST") {
@@ -144,13 +154,16 @@ function composeRequest() {
 									// console.log(address);
 									// console.log(phoneNumber);
 									// console.log(hotelDescription);
-								codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
+								if (typeof doc.title !== 'undefined' || typeof doc.content !== '') {
+									codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
+								}
 							}
 						}
-						if (typeof title === 'undefined') {
+						if (typeof doc.title === 'undefined') {
 							output += ``;
 						}
-						else if (typeof hotelDescription === 'undefined') {
+						else if (hasNoDescription === 1 || typeof hotelDescription === 'undefined') {
+							console.log("this hotel doesn't have a description in the content field");
 							output += `
 								<div class="result">
 									<a href=${url} target="_blank" rel="noopener noreferrer">${title}</a>
@@ -159,6 +172,8 @@ function composeRequest() {
 								</div>
 							`;
 						} else {
+							console.log("there is a description");
+							console.log(hotelDescription)
 							output += `
 								<div class="result">
 									<a href=${url} target="_blank" rel="noopener noreferrer">${title}</a>
