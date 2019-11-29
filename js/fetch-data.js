@@ -24,7 +24,7 @@ function composeRequest() {
 				let loadingTime = data.responseHeader.QTime + "ms.";
 				let i = 0;
 				if (data.response.numFound === 0) {
-					solrRequest = "http://localhost:8983/solr/nutch/select?q=url%3A(";
+					solrRequest = "http://localhost:8983/solr/nutch/select?q=title%3A(";
 					console.log(finalRequest);
 					setMapOnAll(null);
 					output = `
@@ -44,7 +44,7 @@ function composeRequest() {
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
 						let splitContent = content.split("\n");
-						// console.log(splitContent);
+						console.log(splitContent);
 						let nextIsAddress = 0;
 						let nextIsPhoneNumber = 0;
 						let nextIsPropertyAmenities = 0;
