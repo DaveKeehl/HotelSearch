@@ -10,17 +10,21 @@ searchField.addEventListener("keydown", (event) => {
 
 function composeRequest() {
 	console.clear();
-	var solrRequest = "http://localhost:8983/solr/nutch/select?q=url%3A(";
-	let processedQuery = searchField.value.replace(/ /g, "\%20AND\%20");
-	let rows = ")&rows=100";
+	var solrRequest = "http://localhost:8983/solr/nutch/select?q=";
+	let urlQuery = "url%3A";
+	let titleQuery = "title%3A";
+	let contentQuery = "content%3A";
+	let queryFieldSeparator = "%20%26%20";
+	let processedText = searchField.value.replace(/ /g, "\%20AND\%20");
+	let rows = "&rows=100";
 	let requestFormat = "&wt=json";
-	var finalRequest = solrRequest + processedQuery + rows + requestFormat;
+	var finalRequest = solrRequest + urlQuery + "(" + processedText + ")" + queryFieldSeparator + titleQuery + "(" + processedText + ")" + contentQuery + "(" + processedText + ")" + rows + requestFormat;
 	console.log(finalRequest);
 	if (searchField.value !== "") {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
-				console.log(data);
+				// console.log(data);
 				let output = '';
 				if (data.response.numFound === 0) {
 					setMapOnAll(null);
@@ -43,7 +47,7 @@ function composeRequest() {
 						let content = `${doc.content}`;
 						// console.log(content);
 						let splitContent = content.split("\n");
-						console.log(splitContent);
+						// console.log(splitContent);
 						let nextIsAddress = 0;
 						let nextIsPhoneNumber = 0;
 						let nextIsPropertyAmenities = 0;
@@ -103,7 +107,7 @@ function composeRequest() {
 								splitContent[i+2] === "Service" && 
 								splitContent[i+3] === "Value" && 
 								(splitContent[i+4] === "Location" || splitContent[i+4] === "Good to know" || splitContent[i+4] === "Property amenities")) {
-								console.log("this hotel has NO description!!!");
+								// console.log("this hotel has NO description!!!");
 								hasNoDescription = 1;
 							}
 	
@@ -143,7 +147,7 @@ function composeRequest() {
 						// console.log(roomTypes);
 						// console.log(languageSpoken);
 						hotelDescription = descriptions[0];
-						console.log("hasNoDescription = " + hasNoDescription);
+						// console.log("hasNoDescription = " + hasNoDescription);
 						if (i < 20) {
 							// console.log("result number: " + i);
 							if (wordsInTitle[0] === "THE" && wordsInTitle[1] === "10" && wordsInTitle[2] === "BEST") {
@@ -163,7 +167,7 @@ function composeRequest() {
 							output += ``;
 						}
 						else if (hasNoDescription === 1 || typeof hotelDescription === 'undefined') {
-							console.log("this hotel doesn't have a description in the content field");
+							// console.log("this hotel doesn't have a description in the content field");
 							output += `
 								<div class="result">
 									<a href=${url} target="_blank" rel="noopener noreferrer">${title}</a>
@@ -172,8 +176,8 @@ function composeRequest() {
 								</div>
 							`;
 						} else {
-							console.log("there is a description");
-							console.log(hotelDescription)
+							// console.log("there is a description");
+							// console.log(hotelDescription)
 							output += `
 								<div class="result">
 									<a href=${url} target="_blank" rel="noopener noreferrer">${title}</a>
