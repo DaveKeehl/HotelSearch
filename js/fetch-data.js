@@ -184,7 +184,7 @@ function composeRequest() {
 								// console.log(phoneNumber);
 								// console.log(hotelDescription);
 								console.log("skipResult: " + skipResult);
-								if (typeof doc.title !== 'undefined' || typeof doc.content !== '' || skipResult === 0) {
+								if ((typeof doc.title !== 'undefined' || typeof doc.content !== '') && skipResult === 0) {
 									codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
 								}
 							}
