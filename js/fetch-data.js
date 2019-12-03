@@ -15,13 +15,16 @@ function composeRequest() {
 	let titleQuery = "title%3A";
 	let contentQuery = "content%3A";
 	let queryFieldSeparator = "%20OR%20";
-	let processedText = searchField.value.trim().replace(/ /g, "\%20AND\%20");
+	let stopwords = /\b(a|an|and|are|as|at|be|but|by|for|if|in|into|is|it|no|not|of|on|or|such|that|the|their|then|there|these|they|this|to|was|will|with)\b/ig;
+	let specialCharacters = /[`~!@#$%^&*()-_=+[\]{}'";,.?":{}|<>\\/]/g;
+	let doubleSpaces = / +(?= )/g;
+	let spaceBeforePunctuation = / +(\W)/g;
+	let processedText = searchField.value.trim().replace(stopwords,'').replace(specialCharacters,'').replace(doubleSpaces,'').replace(spaceBeforePunctuation,'').replace(/ /g, "\%20OR\%20");
 	let rows = "&rows=5000";
 	let requestFormat = "&wt=json";
-	var finalRequest = solrRequest + urlQuery + "(" + processedText + ")" + queryFieldSeparator + titleQuery + "(" + processedText + ")" + queryFieldSeparator + contentQuery + "(" + processedText + ")" + rows + requestFormat;
+	var finalRequest = solrRequest + urlQuery + "(" + processedText + ")^2.0" + queryFieldSeparator + titleQuery + "(" + processedText + ")^1.5" + queryFieldSeparator + contentQuery + "(" + processedText + ")^1.0" + rows + requestFormat;
 	console.log(finalRequest);
-	let inputControl = /[`~!@#$%^&*()-_=+[\]{}'";,.?":{}|<>\\/]/g;
-	if (searchField.value !== "" && (searchField.value).match(inputControl) === null) {
+	if (searchField.value !== "") {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
@@ -228,20 +231,6 @@ function composeRequest() {
 				}
 			})
 			.catch(error => console.log(error))
-	} else if (searchField.value !== "" && (searchField.value).match(inputControl)) {
-		var output = `
-			<div id="nothing-to-show">
-				<h1>Invalid characters.</h1>
-				<img src="src/images/robot.png">
-			</div>
-		`;
-		document.getElementById("results").innerHTML = output;
-		mapToggle.classList.remove("colorful");
-		mapToggle.classList.add("grayscale");
-		mapContainer.classList.remove("map-open");
-		mapContainer.classList.add("map-closed");
-		mapState = false;
-		console.log("Invalid characters");
 	} else {
 		var output = `
 			<div id="nothing-to-show">
