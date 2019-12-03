@@ -57,6 +57,7 @@ function composeRequest() {
 				} else {
 					let i = 0;
 					skippedCounter = 0;
+					keepCounter = 0;
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
 						// console.log(content);
@@ -82,6 +83,7 @@ function composeRequest() {
 							skippedCounter = skippedCounter + 1;
 						} else {
 							console.log("keep this");
+							keepCounter = keepCounter + 1;
 						}
 						let address;
 						let phoneNumber;
@@ -173,7 +175,7 @@ function composeRequest() {
 						// console.log(languageSpoken);
 						hotelDescription = descriptions[0];
 						// console.log("hasNoDescription = " + hasNoDescription);
-						if (i < 20) {
+						if (keepCounter < 20) {
 							// console.log("result number: " + i);
 							if (wordsInTitle[0] === "THE" && wordsInTitle[1] === "10" && wordsInTitle[2] === "BEST") {
 								console.log("found a TOP 10 list... skipping");
