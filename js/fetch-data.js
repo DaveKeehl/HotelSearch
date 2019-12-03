@@ -183,7 +183,7 @@ function composeRequest() {
 									// console.log(address);
 									// console.log(phoneNumber);
 									// console.log(hotelDescription);
-								if (typeof doc.title !== 'undefined' || typeof doc.content !== '') {
+								if (typeof doc.title !== 'undefined' || typeof doc.content !== '' || skipResult !== 1) {
 									codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
 								}
 							}
