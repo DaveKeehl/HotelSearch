@@ -1,3 +1,15 @@
+let menu = document.querySelector(".search .icons a ~ img");
+let menuState = false;
+menu.addEventListener("click", () => {
+	if (menuState === false) {
+		menuState = true;
+		console.log("open");
+	} else {
+		menuState = false;
+		console.log("close");
+	}
+});
+
 let searchField = document.getElementById("query");
 searchField.addEventListener("keydown", (event) => {
 	if (event.keyCode === 13) {
@@ -16,10 +28,11 @@ function composeRequest() {
 	let contentQuery = "content%3A";
 	let queryFieldSeparator = "%20%26%20";
 	let processedText = searchField.value.replace(/ /g, "\%20AND\%20");
-	let rows = "&rows=100";
+	let rows = "&rows=5000";
 	let requestFormat = "&wt=json";
 	var finalRequest = solrRequest + urlQuery + "(" + processedText + ")" + queryFieldSeparator + titleQuery + "(" + processedText + ")" + contentQuery + "(" + processedText + ")" + rows + requestFormat;
 	console.log(finalRequest);
+	let inputControl = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
 	if (searchField.value !== "") {
 		fetch(finalRequest)
 			.then(res => res.json())
@@ -43,6 +56,7 @@ function composeRequest() {
 					console.log("no results");
 				} else {
 					let i = 0;
+					skippedCounter = 0;
 					data.response.docs.forEach(function(doc) {
 						let content = `${doc.content}`;
 						// console.log(content);
@@ -58,6 +72,17 @@ function composeRequest() {
 						let wordsInTitle = title.split(" ");
 						let hotel = title.split("-")[0].trim();
 						let url = `${doc.url}`;
+						let skipResult = 0;
+						let urlRegex1 = /https?:\/\/([a-z0-9-]+\.)*tripadvisor\.co\.uk\/Hotel_Review([a-zA-Z0-9-])*-or([0-9])*-([a-zA-Z0-9-_])*/g;
+						let urlRegex2 = /https?:\/\/([a-z0-9-]+\.)*tripadvisor\.co\.uk\/Hotel_Review-s([0-9])-([a-zA-Z0-9-_])*/g;
+						console.log(url);
+						if (url.match(urlRegex1) || url.match(urlRegex2)) {
+							console.log("you don't want this link");
+							skipResult = 1;
+							skippedCounter = skippedCounter + 1;
+						} else {
+							console.log("REGEX DOES NOT MATCH");
+						}
 						let address;
 						let phoneNumber;
 						let hotelDescription;
@@ -163,7 +188,7 @@ function composeRequest() {
 								}
 							}
 						}
-						if (typeof doc.title === 'undefined') {
+						if (typeof doc.title === 'undefined' || skipResult === 1) {
 							output += ``;
 						}
 						else if (hasNoDescription === 1 || typeof hotelDescription === 'undefined') {
@@ -191,8 +216,20 @@ function composeRequest() {
 					});
 				}
 				let loadingTime = data.responseHeader.QTime + "ms.";
-				document.getElementById("numberOfResults").innerHTML = `${data.response.numFound}` + " results in " + loadingTime;
-				document.getElementById("results").innerHTML = output;
+				let numberOfResults = `${data.response.numFound}` - skippedCounter;
+				console.log("Total results: " + `${data.response.numFound}`);
+				console.log("Skipped results: " + skippedCounter);
+				document.getElementById("numberOfResults").innerHTML = numberOfResults + " results in " + loadingTime;
+				if (numberOfResults > 0) {
+					document.getElementById("results").innerHTML = output;
+				} else {
+					document.getElementById("results").innerHTML = `
+						<div id="nothing-to-show">
+							<h1>No results.</h1>
+							<img src="src/images/robot.png">
+						</div>
+					`;
+				}
 			})
 			.catch(error => console.log(error))
 	} else {

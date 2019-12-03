@@ -8,40 +8,41 @@
 		<link href="src/styles/layout.css" rel="stylesheet" type="text/css">
 		<link href="src/styles/style.css" rel="stylesheet" type="text/css"/>
 	</head>
-	<body onload="console.log('reloaded')">
-		
-		<div class="resultsPage">
+	<body onload="console.log('Page has finished loading')">
 
-			<div class="search">
-				<a href="index.html" class="logo">HotelSearch.</a>
-				<div class="form">
-					<input id="query" type="text" name="query" placeholder="Enter a query"/>
-				</div>
-				<a href="https://www.github.com/DaveKeehl/HotelSearch" target="_blank" rel="noopener noreferrer">
-					<img src="src/images/github.svg" alt="Github logo"></img>
-				</a>
+		<div class="search">
+			<a href="index.html" class="logo">HotelSearch.</a>
+			<div class="form">
+				<input id="query" type="text" name="query" placeholder="Enter a query"/>
 			</div>
-
-			<div class="results">
-				<div class="resultsList">
-					<h1>Results.</h1>
-					<div class="resultsHeader">
-						<p id="numberOfResults">0 results.</p>
-						<img src="src/images/map.svg" class="grayscale">
-					</div>
-					<div class="mapContainer">
-						<div id="map"></div>
-					</div>
-					<div id="results">
-						<div id="nothing-to-show">
-							<h1>Please start with a query.</h1>
-							<img src="src/images/robot.png">
-						</div>
-					</div>
-				</div>
+			<div class="icons">
+				<a href="https://www.github.com/DaveKeehl/HotelSearch" target="_blank" rel="noopener noreferrer"><img src="src/images/github.svg" alt="Github logo"></img></a>
+				<img src="src/images/menu.svg" alt="menu"></img>
 			</div>
-			
 		</div>
+
+		<div class="results">
+			<div class="resultsList">
+				<h1>Results.</h1>
+				<div class="resultsHeader">
+					<p id="numberOfResults">0 results.</p>
+					<img src="src/images/map.svg" class="grayscale">
+				</div>
+				<div class="mapContainer">
+					<div id="map"></div>
+				</div>
+				<div id="results">
+					<div id="nothing-to-show">
+						<h1>Please start with a query.</h1>
+						<img src="src/images/robot.png">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="menu-overlay">
+			<div class="menu"></div>
+		</div> -->
 		
 	</body>
 
