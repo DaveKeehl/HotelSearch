@@ -81,7 +81,7 @@ function composeRequest() {
 							skipResult = 1;
 							skippedCounter = skippedCounter + 1;
 						} else {
-							console.log("REGEX DOES NOT MATCH");
+							console.log("keep this");
 						}
 						let address;
 						let phoneNumber;
@@ -178,11 +178,12 @@ function composeRequest() {
 							if (wordsInTitle[0] === "THE" && wordsInTitle[1] === "10" && wordsInTitle[2] === "BEST") {
 								console.log("found a TOP 10 list... skipping");
 							} else {
-									// console.log(hotel);
-									// console.log(url);
-									// console.log(address);
-									// console.log(phoneNumber);
-									// console.log(hotelDescription);
+								// console.log(hotel);
+								// console.log(url);
+								// console.log(address);
+								// console.log(phoneNumber);
+								// console.log(hotelDescription);
+								console.log("skipResult: " + skipResult);
 								if (typeof doc.title !== 'undefined' || typeof doc.content !== '' || skipResult !== 1) {
 									codeAddress(i, hotel, url, address, phoneNumber, hotelDescription, score, vote, propertyAmenities, roomFeatures, roomTypes, languageSpoken);
 								}
