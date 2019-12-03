@@ -1,15 +1,3 @@
-let menu = document.querySelector(".search .icons a ~ img");
-let menuState = false;
-menu.addEventListener("click", () => {
-	if (menuState === false) {
-		menuState = true;
-		console.log("open");
-	} else {
-		menuState = false;
-		console.log("close");
-	}
-});
-
 let searchField = document.getElementById("query");
 searchField.addEventListener("keydown", (event) => {
 	if (event.keyCode === 13) {
@@ -26,14 +14,14 @@ function composeRequest() {
 	let urlQuery = "url%3A";
 	let titleQuery = "title%3A";
 	let contentQuery = "content%3A";
-	let queryFieldSeparator = "%20%26%20";
-	let processedText = searchField.value.replace(/ /g, "\%20AND\%20");
+	let queryFieldSeparator = "%20OR%20";
+	let processedText = searchField.value.trim().replace(/ /g, "\%20AND\%20");
 	let rows = "&rows=5000";
 	let requestFormat = "&wt=json";
-	var finalRequest = solrRequest + urlQuery + "(" + processedText + ")" + queryFieldSeparator + titleQuery + "(" + processedText + ")" + contentQuery + "(" + processedText + ")" + rows + requestFormat;
+	var finalRequest = solrRequest + urlQuery + "(" + processedText + ")" + queryFieldSeparator + titleQuery + "(" + processedText + ")" + queryFieldSeparator + contentQuery + "(" + processedText + ")" + rows + requestFormat;
 	console.log(finalRequest);
-	let inputControl = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
-	if (searchField.value !== "") {
+	let inputControl = /[`~!@#$%^&*()-_=+[\]{}'";,.?":{}|<>\\/]/g;
+	if (searchField.value !== "" && (searchField.value).match(inputControl) === null) {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
@@ -219,9 +207,14 @@ function composeRequest() {
 					});
 				}
 				let loadingTime = data.responseHeader.QTime + "ms.";
-				let numberOfResults = `${data.response.numFound}` - skippedCounter;
+				let numberOfResults;
 				console.log("Total results: " + `${data.response.numFound}`);
-				console.log("Skipped results: " + skippedCounter);
+				if (`${data.response.numFound}` > 0) {
+					numberOfResults = `${data.response.numFound}` - skippedCounter;
+					console.log("Skipped results: " + skippedCounter);
+				} else {
+					numberOfResults = 0;
+				}
 				document.getElementById("numberOfResults").innerHTML = numberOfResults + " results in " + loadingTime;
 				if (numberOfResults > 0) {
 					document.getElementById("results").innerHTML = output;
@@ -235,6 +228,20 @@ function composeRequest() {
 				}
 			})
 			.catch(error => console.log(error))
+	} else if (searchField.value !== "" && (searchField.value).match(inputControl)) {
+		var output = `
+			<div id="nothing-to-show">
+				<h1>Invalid characters.</h1>
+				<img src="src/images/robot.png">
+			</div>
+		`;
+		document.getElementById("results").innerHTML = output;
+		mapToggle.classList.remove("colorful");
+		mapToggle.classList.add("grayscale");
+		mapContainer.classList.remove("map-open");
+		mapContainer.classList.add("map-closed");
+		mapState = false;
+		console.log("Invalid characters");
 	} else {
 		var output = `
 			<div id="nothing-to-show">
