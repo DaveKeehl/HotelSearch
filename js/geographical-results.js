@@ -121,7 +121,7 @@ function clearOverlays() {
 	markers.length = 0;
 }
 
-let mapToggle = document.querySelector(".resultsHeader img");
+let mapToggle = document.querySelector("#map-toggle");
 let mapContainer = document.getElementsByClassName("mapContainer")[0];
 let mapState = false;
 
@@ -132,12 +132,14 @@ mapToggle.addEventListener("click", event => {
 			mapToggle.classList.add("colorful");
 			mapContainer.classList.remove("map-closed");
 			mapContainer.classList.add("map-open");
+			mapToggle.value = "Open geographical map"
 			mapState = true;
 		} else {
 			mapToggle.classList.remove("colorful");
 			mapToggle.classList.add("grayscale");
 			mapContainer.classList.remove("map-open");
 			mapContainer.classList.add("map-closed");
+			mapToggle.value = "Hide geographical map"
 			mapState = false;
 		}
 	} else {

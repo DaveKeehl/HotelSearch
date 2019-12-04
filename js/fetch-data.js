@@ -44,7 +44,7 @@ function composeRequest() {
 					mapContainer.classList.remove("map-open");
 					mapContainer.classList.add("map-closed");
 					mapState = false;
-					console.log("no results");
+					// console.log("no results");
 				} else {
 					let i = 0;
 					skippedCounter = 0;
@@ -211,11 +211,11 @@ function composeRequest() {
 				}
 				let loadingTime = data.responseHeader.QTime + "ms.";
 				let numberOfResults;
-				console.log("Total results: " + `${data.response.numFound}`);
+				// console.log("Total results: " + `${data.response.numFound}`);
 				if (`${data.response.numFound}` > 0) {
 					numberOfResults = `${data.response.numFound}` - skippedCounter;
-					console.log("Skipped results: " + skippedCounter);
-					console.log("Results shown: " + `${data.response.numFound}` + "-" + skippedCounter + " = " + numberOfResults);
+					// console.log("Skipped results: " + skippedCounter);
+					// console.log("Results shown: " + `${data.response.numFound}` + "-" + skippedCounter + " = " + numberOfResults);
 				} else {
 					numberOfResults = 0;
 				}
@@ -254,6 +254,6 @@ function composeRequest() {
 		mapContainer.classList.remove("map-open");
 		mapContainer.classList.add("map-closed");
 		mapState = false;
-		console.log("Please enter a query");
+		// console.log("Please enter a query");
 	}
 }

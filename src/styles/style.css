@@ -23,14 +23,47 @@ html {
 	box-shadow: 0 0 20px rgba(0, 0, 0, .05);
 }
 
-@keyframes loading {
+.results input[type="button"] {
+	font-size: 16px;
+	background-color: #939393;
+	border: 1px solid;
+	border-radius: 5px;
+	color: white;
+}
+
+.results input[type="button"]:hover {
+	cursor: pointer;
+}
+
+.results input[type="button"]:active {
+	background-color: black;
+}
+
+.results input[type="button"]:focus {
+	outline: 0;
+}
+
+.results #top {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	border-bottom: 2px solid;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.results #top h1 {
+	margin: 0;
+}
+
+/* @keyframes loading {
 	0% {
 		right: 100%;
 	}
 	100% {
 		right: -200%;
 	}
-}
+} */
 
 /* .search::after {
 	--loadingHeight: 5px;

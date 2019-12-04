@@ -8,7 +8,7 @@
 		<link href="src/styles/layout.css" rel="stylesheet" type="text/css">
 		<link href="src/styles/style.css" rel="stylesheet" type="text/css"/>
 	</head>
-	<body onload="console.log('Page has finished loading')">
+	<body>
 
 		<div class="search">
 			<a href="index.html" class="logo">HotelSearch.</a>
@@ -22,10 +22,13 @@
 
 		<div class="results">
 			<div class="resultsList">
-				<h1>Results.</h1>
+				<div id="top">
+					<h1>Results.</h1>
+					<input type="button" name="map" id="map-toggle" value="See the top 20 results on a map">
+				</div>
 				<div class="resultsHeader">
 					<p id="numberOfResults">0 results.</p>
-					<img src="src/images/map.svg" class="grayscale">
+					<!-- <img src="src/images/map.svg" class="grayscale"> -->
 				</div>
 				<div class="mapContainer">
 					<div id="map"></div>
