@@ -28,7 +28,7 @@ function composeRequest() {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
-				console.log(data);
+				// console.log(data);
 				let output = '';
 				if (data.response.numFound === 0) {
 					setMapOnAll(null);
