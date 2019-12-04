@@ -13,10 +13,10 @@ It was developed using:
 
 ## Installation
 
-1. In order for HotelSearch to work properly, [you have to download my Solr package]().
+1. In order for HotelSearch to work properly, [you have to download my Solr package](https://drive.google.com/open?id=1QJzASk8bRer6N-i76Aln7xrY5-p4GOsA).
 
 2. After the download has completed, open your terminal, go to the solr-8.2.0 directory and type the following command: ``` bin/solr start ```
 
 3. Solr will start on ```localhost:8983```
-4. Open ```index.html``` on a web browser
+4. Visit [https://hotelsearch.netlify.com/](https://hotelsearch.netlify.com/)
 5. Have fun!
