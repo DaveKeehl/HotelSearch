@@ -125,6 +125,11 @@ html {
 	transition: all 0.2s;
 }
 
+.result:last-child {
+	margin-bottom: 50px;
+}
+
+
 .result:hover {
 	box-shadow: 0 3px 7px 0px rgba(0, 0, 0, 0.35);
 	transform: translateX(10px);
