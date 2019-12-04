@@ -132,14 +132,14 @@ mapToggle.addEventListener("click", event => {
 			mapToggle.classList.add("colorful");
 			mapContainer.classList.remove("map-closed");
 			mapContainer.classList.add("map-open");
-			mapToggle.value = "Open geographical map"
+			mapToggle.value = "Close geographical map"
 			mapState = true;
 		} else {
 			mapToggle.classList.remove("colorful");
 			mapToggle.classList.add("grayscale");
 			mapContainer.classList.remove("map-open");
 			mapContainer.classList.add("map-closed");
-			mapToggle.value = "Close geographical map"
+			mapToggle.value = "Open geographical map"
 			mapState = false;
 		}
 	} else {
