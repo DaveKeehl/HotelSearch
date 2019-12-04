@@ -20,7 +20,7 @@ function composeRequest() {
 	let doubleSpaces = / +(?= )/g;
 	let spaceBeforePunctuation = / +(\W)/g;
 	let processedText = searchField.value.trim().replace(stopwords,'').replace(specialCharacters,'').replace(doubleSpaces,'').replace(spaceBeforePunctuation,'').replace(/ /g, "\%20OR\%20");
-	let rows = "&rows=5000&start=0";
+	let rows = "&rows=500&start=0";
 	let requestFormat = "&wt=json";
 	var finalRequest = solrRequest + urlQuery + "(" + processedText + ")^2.0" + queryFieldSeparator + titleQuery + "(" + processedText + ")^1.5" + queryFieldSeparator + contentQuery + "(" + processedText + ")^1.0" + rows + requestFormat;
 	console.log(finalRequest);
@@ -28,7 +28,7 @@ function composeRequest() {
 		fetch(finalRequest)
 			.then(res => res.json())
 			.then(function(data) {
-				// console.log(data);
+				console.log(data);
 				let output = '';
 				if (data.response.numFound === 0) {
 					setMapOnAll(null);
@@ -212,8 +212,8 @@ function composeRequest() {
 				let loadingTime = data.responseHeader.QTime + "ms.";
 				let numberOfResults;
 				// console.log("Total results: " + `${data.response.numFound}`);
-				if (`${data.response.numFound}` > 0) {
-					numberOfResults = `${data.response.numFound}` - skippedCounter;
+				if (`${data.response.docs.length}` > 0) {
+					numberOfResults = `${data.response.docs.length}` - skippedCounter;
 					// console.log("Skipped results: " + skippedCounter);
 					// console.log("Results shown: " + `${data.response.numFound}` + "-" + skippedCounter + " = " + numberOfResults);
 				} else {
