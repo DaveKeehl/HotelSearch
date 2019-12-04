@@ -13,7 +13,7 @@ It was developed using:
 
 ## Installation
 
-1. In order for HotelSearch to work properly, [you have to download my Solr package]().
+1. In order for HotelSearch to work properly, [you have to download my Solr package](https://drive.google.com/open?id=1QJzASk8bRer6N-i76Aln7xrY5-p4GOsA).
 
 2. After the download has completed, open your terminal, go to the solr-8.2.0 directory and type the following command: ``` bin/solr start ```
 
