@@ -139,7 +139,7 @@ mapToggle.addEventListener("click", event => {
 			mapToggle.classList.add("grayscale");
 			mapContainer.classList.remove("map-open");
 			mapContainer.classList.add("map-closed");
-			mapToggle.value = "Hide geographical map"
+			mapToggle.value = "Close geographical map"
 			mapState = false;
 		}
 	} else {
