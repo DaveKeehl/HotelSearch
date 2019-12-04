@@ -18,5 +18,5 @@ It was developed using:
 2. After the download has completed, open your terminal, go to the solr-8.2.0 directory and type the following command: ``` bin/solr start ```
 
 3. Solr will start on ```localhost:8983```
-4. Open ```index.html``` on a web browser
+4. Visit [https://hotelsearch.netlify.com/](https://hotelsearch.netlify.com/)
 5. Have fun!
